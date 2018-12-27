@@ -16,8 +16,19 @@ This package has made changes in pouchdb-adapter-websql and pouch-adapter-http f
 npm install --save react-native-sqlite-2
 npm install --save https://github.com/kkbhav/pouchdb-adapters-rn.git
 npm install --save https://github.com/kkbhav/react-native-fetch-blob.git
-react-native link rn-fetch-blob
+react-native link react-native-fetch-blob
 react-native link react-native-sqlite-2
+
+```
+#### - Extra step for Android
+
+```java
+// Ensure you have these dependencies in /android/app/build.gradle:
+dependencies {
+    compile project(':react-native-sqlite-2')
+    compile project(':react-native-fetch-blob')
+    ...
+}
 ```
 #### - Extra step for iOS
 
@@ -47,11 +58,11 @@ var remote = new PouchDB('http://127.0.0.1:5984/mydb');
 
 4. **remote.putAttachment(docId, attachmentId, [rev], attachment, type, [callback])**
     - attachment: file-uri or base64(cannot process blob types)
-    
+
 5. **remote.put(doc)** or **remote.bulkDocs(docs)**
-    - accepts file-uri or base64 in attachment data,  
+    - accepts file-uri or base64 in attachment data,
     Example doc
-    
+
     ```js
     const doc = {
      _id: 'somethings',
@@ -76,17 +87,17 @@ var remote = new PouchDB('http://127.0.0.1:5984/mydb');
 3. **db.allDocs(options)**
     - extra options values(optional)
         - path: boolean to return attachment as fileUri(optional, if not passed base64 string will be returned)
-        
+
 4. **db.get(docId)**
     - will return attachment as base64 if requested
 
 5. **db.putAttachment(docId, attachmentId, [rev], attachment, type, [callback])**
     - attachment: file-uri or base64(cannot process blob types)
-    
+
 6. **db.bulkDocs(docs)**
     - accepts path in attachment data,
     Example docs
-    
+
     ```js
     const docs = [{
      _id: 'somethings',
@@ -99,11 +110,11 @@ var remote = new PouchDB('http://127.0.0.1:5984/mydb');
     }]
     db.bulkDocs(docs);
     ```
-    
+
 7. **db.put(doc)**
     - accepts path in attachment data,
     Example docs
-    
+
     ```js
     const doc = {
      _id: 'somethings',
